@@ -1,15 +1,13 @@
 import Cat from '../Cat'
-import React, {useCallback} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
 
-const CatsList = () => {
-    const dispatch = useDispatch()
-    const items = useSelector(state => state.items)
+const CatsList = ({items, handleRemove}) => {
+    
 
-    const onClickRemove = useCallback((item) => {
+    const onClickRemove = (item) => {
 
-        dispatch({type: 'REMOVE_ITEM', payload: item})
-    })
+        handleRemove(item)
+    }
     
     return (
         <div>
