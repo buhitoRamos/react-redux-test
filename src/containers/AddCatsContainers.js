@@ -1,23 +1,28 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { useState } from 'react'
 import AddCats from '../components/AddCats'
-import {addItem} from '../actions/index'
+import { useDispatch } from 'react-redux'
+import { addItem } from '../actions/index'
 
+const AddCatsContainers = () => {
 
-class AddCatsContainers extends Component {
-  
-    handleAddCat = cat => {
-        this.props.addItem(cat)
+    const dispatch = useDispatch();
+
+    const handleDispatch = (cat) => {
+        dispatch(addItem(cat))
     }
-    render() {
-        return (
-            <AddCats
-            handleAddCat={this.handleAddCat}
-            />
-        )
-    }
+
+    const [cat, setCat] = useState({
+        name: '',
+        age: '',
+        color: ''
+    })
+
+    return (
+        <AddCats
+            cat={cat}
+            setCat={setCat}
+            dispatch={handleDispatch}
+        />
+    )
 }
-const mapDispatchToProps = dispatch => ({
-    addItem: value => dispatch(addItem(value))
-})
-export default connect(null, mapDispatchToProps)(AddCatsContainers)
+export default AddCatsContainers

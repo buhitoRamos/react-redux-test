@@ -3,7 +3,6 @@ import React from 'react'
 
 const CatsList = ({items, handleRemove}) => {
     
-
     const onClickRemove = (item) => {
 
         handleRemove(item)
@@ -11,7 +10,7 @@ const CatsList = ({items, handleRemove}) => {
     
     return (
         <div>
-            {items && items.map(i => <Cat key={i.item} {...i} onClickRemove={onClickRemove}></Cat>)}
+            {items && items.map(i => <Cat key={i.name} item={i} onClickRemove={onClickRemove}></Cat>)}
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import '../Cat/Cat.css'
 export default function Cat({item, onClickRemove}) {
+    
     const {name, color, age} = item
     return (
         <div key={`${name}-${age}`} className="card cat">

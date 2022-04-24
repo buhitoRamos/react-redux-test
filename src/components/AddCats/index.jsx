@@ -1,31 +1,25 @@
-import React, { useState } from 'react'
+import React from "react";
 
-const AddCats = ({ handleAddCat }) => {
-  const [cat, addItem] = useState({
-    name: '',
-    age: '',
-    color: ''
-  })
+const AddCats = ({ cat, setCat, dispatch }) => {
 
-  const onSubmit = () => {
-    handleAddCat(cat);
-    addItem({
+  const _onSubmit = () => {
+    dispatch(cat)
+    setCat({
       name: '',
       age: '',
       color: ''
     })
   }
 
-
   const _setValues = (e) => {
     const { id, value } = e.target
-    addItem({
+    setCat({
       ...cat, [id]: value
     })
   }
 
   return (
-    <form className='container'>
+    <div className='container'>
       <div className='mb-3'>
         <label className='form-label'>Nombre</label>
         <input value={cat.name} id="name" className='form-control' onChange={_setValues} />
@@ -38,9 +32,8 @@ const AddCats = ({ handleAddCat }) => {
         <label className='form-label'>Color</label>
         <input value={cat.color} className='form-control' id="color" onChange={_setValues} />
       </div>
-      <button className='btn btn-primary' onClick={onSubmit}>Guardar</button>
-    </form>
+      <button className='btn btn-primary' onClick={() => _onSubmit()}>Guardar</button>
+    </div>
   )
 }
-
 export default AddCats
