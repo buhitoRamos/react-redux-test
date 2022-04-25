@@ -1,25 +1,27 @@
-import React from 'react'
+import React, { Component } from 'react'
 import CatsList from '../components/CatsList'
-import { useSelector } from "react-redux";
-import {removeItem} from '../actions/index'
-import { useDispatch } from 'react-redux'
+import { removeItem } from '../actions/index'
+import { connect } from 'react-redux';
+class CatsListContainers extends Component {
 
-
-
-const CatsListContainers=() =>  {
-const cats = useSelector((state) => state.items)
-const dispatch = useDispatch()
-const handleRemove = (item) => {
-    dispatch(removeItem(item))
-}
- 
+ handleRemove = items => {
+            this.props.removeItem(items)
+        }
+    render() {
+        
         return (
             <CatsList
-            items={cats}
-            handleRemove={handleRemove}
+                items={this.props.items}
+                handleRemove={this.handleRemove}
             />
         )
+    }
+
 
 }
-
-export default CatsListContainers
+const mapDispatchToProps = dispatch => ({
+    removeItem: items => dispatch(removeItem(items))
+}
+)
+const mapStateToProps = ({ items }) => ({ items })
+export default connect(mapStateToProps, mapDispatchToProps)(CatsListContainers)
